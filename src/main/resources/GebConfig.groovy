@@ -3,10 +3,11 @@ import org.openqa.selenium.firefox.FirefoxDriver
 import org.openqa.selenium.ie.InternetExplorerDriver
 
 // See: http://code.google.com/p/selenium/wiki/HtmlUnitDriver
+String driverLocation = System.getProperty("driver.loc", "drivers"),
+firefoxLocation = System.getProperty("firefox.bin", "C:/Program Files (x86)/Mozilla/Firefox")
+System.setProperty("webdriver.firefox.bin","$firefoxLocation/firefox.exe");
 driver = { new FirefoxDriver() }
-System.setProperty("webdriver.chrome.driver", new File("drivers/chromedriver.exe").getAbsolutePath())
-driver = { new ChromeDriver() }
-quitCachedDriverOnShutdown = false
+//quitCachedDriverOnShutdown = false
 
 
 environments {
@@ -14,7 +15,7 @@ environments {
     // See: http://code.google.com/p/selenium/wiki/ChromeDriver
     chrome {
         //http://chromedriver.storage.googleapis.com/index.html
-        System.setProperty("webdriver.chrome.driver", new File("drivers/chromedriver.exe").getAbsolutePath())
+        System.setProperty("webdriver.chrome.driver", new File("${driverLocation}/chromedriver.exe").getAbsolutePath())
         driver = { new ChromeDriver() }
     }
     ie {
@@ -25,7 +26,7 @@ environments {
 // To set the Protected Mode settings, choose "Internet Options..." from the Tools menu, and click on the Security tab.
 // For each zone, there will be a check box at the bottom of the tab labeled "Enable Protected Mode".
 //                The browser zoom level must be set to 100% so that the native mouse events can be set to the correct coordinates.
-        System.setProperty("webdriver.ie.driver", new File("drivers/IEDriverServer.exe").getAbsolutePath())
+        System.setProperty("webdriver.ie.driver", new File("${driverLocation}/IEDriverServer.exe").getAbsolutePath())
         driver = { new InternetExplorerDriver() }
     }
 }
